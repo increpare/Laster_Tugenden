@@ -4,6 +4,23 @@
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<title>Allgemeine Befehle der Göttin</title>
 	<style>
+		/* latin */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Playfair Display Regular'), local('PlayfairDisplay-Regular'), url(nuFiD-vYSZviVYUb_rj3ij__anPXDTzYgEM86xQ.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin */
+@font-face {
+  font-family: 'UnifrakturMaguntia';
+  font-style: normal;
+  font-weight: 400;
+  src: local('UnifrakturMaguntia'), url(WWXPlieVYwiGNomYU-ciRLRvEmK7oaVemGZMFABK1Q.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 		body {
 
 		  max-width: 600px;
@@ -44,6 +61,14 @@
 		#ausgewählt {
 			font-weight: bold;
 			text-align: center;
+		}
+		.tugend {	
+			/*font-family: 'Playfair Display', serif;*/
+			color:green;
+		}
+		.laster {
+			/*font-family: 'UnifrakturMaguntia', cursive;*/
+			color:red;
 		}
 		.side {
 			width:30pt;
@@ -101,10 +126,10 @@
 		<td class="emside">
 		</td>
 		<td class="goodbad" colspan="2">
-			<button type="button" id="goodbutton"  accesskey="s">Du sollst </button>
+			<button type="button" id="goodbutton"  accesskey="s">Thou shalt </button>
 		</td>
 		<td class="goodbad"  colspan="2">
-			<button type="button" id="badbutton"  accesskey="n">Du sollst <u>nicht</u></button>
+			<button type="button" id="badbutton"  accesskey="n">Thou shalt <u>not</u></button>
 		</td>
 		<td class="emside">
 		</td>
@@ -143,28 +168,57 @@
 </table>
 
 <p>
-	<button>New Game</button>
+	<button type="button" id="newgamebutton" >Spiel neustarten</button>
 <script type="text/javascript">
 	var state=[];
 
 	var agent_zahl = 4;
-	var gebot_zahl = 10;
+	var gebot_zahl = 14;
 	var vor_zeile_zahl = 2;
 
 
-	var starthealth=3;
+	var starthealth=6;
 
 
-	var tugenden = [
-	'Demut','Mildtätigkeit','Keuschheit','Geduld','Mäßigung','Wohlwollen','Fleiß'
-	];
-	var laster = [
-	'Hochmut','Habgier','Wollust','Zorn','Völlerei','Neid','Faulheit'
-	];
+	var gutSchaltfläche;
+	var böseSchaltfläche;
+	var neuSchaltfläche;
+
+
+	// var tugenden = [
+	// // 'Demut','Mildtätigkeit','Keuschheit','Geduld','Mäßigung','Wohlwollen','Fleiß'
+	// // 'humilitas','caritas','castitas','patientia','temperantia','humanitas','industria'
+	// ];
+	// var laster = [
+	// // 'Hochmut','Habgier','Wollust','Zorn','Völlerei','Neid','Faulheit'
+	// ];
+
+	var tugenden = ['Chastity','Temperance','Charity','Diligence','Patience','Kindness','Humility'];
+
+	var laster = ['Lust','Gluttony','Greed','Sloth','Wrath','Envy','Pride'];
 	var worte = tugenden.concat(laster);
 	
+	function tugendsein(w){
+		return tugenden.indexOf(w)>=0;
+	}
+
 	function getWort(){
 		return worte[Math.floor(Math.random()*worte.length)];
+	}
+
+	function befehlWert(agent,wort){
+		// return (wort.length%3)-1;
+
+		for (var i=0;i<gebot_zahl;i++){
+			var gebot = state.gebote[agent][i];
+			if (gebot.length==0){
+				continue;
+			}
+			if (gebot[0]==wort){
+				return gebot[1];
+			}
+		}
+		return 0;
 	}
 
 	function stellZustand(){
@@ -178,7 +232,21 @@
 			for (var j=0;j<vor_zeile_zahl;j++){
 				var elem = document.getElementById(`v${j}c${i}`);
 				console.log(i,j);
-				elem.innerHTML=state.vor[i][j];
+				var wort = state.vor[i][j];
+				elem.innerHTML=hüllWort(wort);
+
+				var wert = befehlWert(i,wort);
+				switch(wert){
+					case -1:
+					elem.className="evil";
+					break;
+					case 0:
+					elem.className="";
+					break;
+					case 1:
+					elem.className="good";
+					break;
+				}
 			}
 		}
 
@@ -189,9 +257,22 @@
 				var gebot = state.gebote[i][j];
 				if (gebot.length===0){
 					elem.innerHTML="&nbsp;";
+					elem.className="";
 					continue;
 				}
-				elem.innerHTML=gebot[0];
+				var wert = befehlWert(i,gebot[0]);
+				switch(wert){
+					case -1:
+					elem.className="evil";
+					break;
+					case 0:
+					elem.className="";
+					break;
+					case 1:
+					elem.className="good";
+					break;
+				}
+				elem.innerHTML=hüllWort(gebot[0]);
 			}
 		}
 
@@ -206,7 +287,23 @@
 		// state.reihe=[];
 		for (var i=0;i<agent_zahl;i++){
 			var elem = document.getElementById(`agw${i}`);
-			elem.innerHTML=state.reihe[i];
+			var wort = state.reihe[i];
+			elem.innerHTML=hüllWort(wort);
+
+
+				var wert = befehlWert(i,wort);
+				switch(wert){
+					case -1:
+					elem.className="evil";
+					break;
+					case 0:
+					elem.className="";
+					break;
+					case 1:
+					elem.className="good";
+					break;
+				}
+
 		// 	state.reihe.push(getWort());
 		}
 	}
@@ -323,8 +420,134 @@
 		table.innerHTML +=  inner;
 	}
 
+	function sollAnimieren(){		
+		for (var i=0;i<agent_zahl;i++){
+			var wort = state.reihe[i];
+			if (befehlWert(i,wort)!=0){
+				return true;
+			}
+		}
+	}
+
+	function tueTick(){
+		for (var i=0;i<agent_zahl;i++){
+			var wort = state.reihe[i];
+			if (befehlWert(i,wort)!=0){
+				var wert = befehlWert(i,wort);
+				befehlSpalte(i,wert,false);
+			}
+		}
+		stellZustand();
+
+		if (sollAnimieren()){
+			fangMitAutoAn();
+		} else {
+			gutSchaltfläche.disabled=false;
+			böseSchaltfläche.disabled=false;
+			neuSchaltfläche.disabled=false;
+		}
+	}
+
+	function fangMitAutoAn(){
+		gutSchaltfläche.disabled=true;
+		böseSchaltfläche.disabled=true;
+		neuSchaltfläche.disabled=true;
+
+		setTimeout(tueTick,100);
+	}
+
+	function befehl(wert){
+		for (var i=0;i<agent_zahl;i++){
+			befehlSpalte(i,wert,true);
+		}
+		
+		if (sollAnimieren()){
+			fangMitAutoAn();
+		}
+
+		stellZustand();
+	}
+
+	function befehlSpalte(agent,wert,hinzufügen){
+		var i=agent;
+		//1 bewege gebote hinunter
+
+		if (hinzufügen){
+			for (var j=gebot_zahl-1;j>=0;j--){
+				state.gebote[i][j+1]=state.gebote[i][j];
+			}
+		}
+
+		//2 bewege die aktive Zeile hinunter + set wert
+
+		if (hinzufügen){
+			state.gebote[i][0]=[state.reihe[i],wert];
+		}
+			var delta=0;
+			if (tugendsein(state.reihe[i])){
+				delta=wert;
+			} else {
+				delta=-wert;
+			}
+			state.healths[i]+=delta;
+
+		//3 bewege die Vorschauzeile hinunter
+
+			state.reihe[i]=state.vor[i][vor_zeile_zahl-1];
+
+
+		//4 bewege Vorschauzeile hinunter
+
+			for (var j=vor_zeile_zahl-1;j>=0;j--){
+				state.vor[i][j+1]=state.vor[i][j];
+			}
+
+		//5 neuzeichnen
+
+			state.vor[i][0]=getWort();
+
+
+		//6 mit der animation anfangen, wenn relevant
+	}
+
+	function aufGutKlicken(){
+		befehl(1);
+	}
+	
+	function aufBöseKlicken(){
+		befehl(-1);
+	}
+	
+	function aufNeuKlicken(){
+		generiereTabelle();
+		stellZustand();
+	}
+
+	function hüllWort(w){
+		if (tugendsein(w)){
+			w = `<span class="tugend">${w}</span>`;
+		} else {
+			w = `<span class="laster">${w}</span>`;
+		} 
+
+		return w; 
+	}
+
+	function schließSchaltflächeAn(){
+
+		gutSchaltfläche = document.getElementById('goodbutton');
+		böseSchaltfläche = document.getElementById('badbutton');
+		neuSchaltfläche = document.getElementById('newgamebutton');
+
+		gutSchaltfläche.addEventListener("click", aufGutKlicken);
+		böseSchaltfläche.addEventListener("click", aufBöseKlicken);
+		neuSchaltfläche.addEventListener("click", aufNeuKlicken);
+
+	}
+
 	generiereTabelle();
 	stellZustand();
+	schließSchaltflächeAn();
 
 </script>
 </body>
