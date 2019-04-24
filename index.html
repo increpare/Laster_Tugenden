@@ -155,9 +155,7 @@
 		</td>
 		<td id="r1c1" class="oben obenleft">⋮
 		</td>
-		<td id="r1c2" class="oben">⋮
-		</td>
-		<td id="r1c3" class="oben">⋮
+		<td id="r1c4" class="oben obenright">⋮
 		</td>
 		<td id="r1c4" class="oben obenright">⋮
 		</td>
@@ -233,7 +231,7 @@
 				var elem = document.getElementById(`v${j}c${i}`);
 				console.log(i,j);
 				var wort = state.vor[i][j];
-				elem.innerHTML=hüllWort(wort);
+				elem.innerHTML=hüllWort(wort,i);
 
 				var wert = befehlWert(i,wort);
 				switch(wert){
@@ -272,7 +270,7 @@
 					elem.className="good";
 					break;
 				}
-				elem.innerHTML=hüllWort(gebot[0]);
+				elem.innerHTML=hüllWort(gebot[0],-1);
 			}
 		}
 
@@ -288,7 +286,7 @@
 		for (var i=0;i<agent_zahl;i++){
 			var elem = document.getElementById(`agw${i}`);
 			var wort = state.reihe[i];
-			elem.innerHTML=hüllWort(wort);
+			elem.innerHTML=hüllWort(wort,i);
 
 
 				var wert = befehlWert(i,wort);
@@ -483,13 +481,38 @@
 		if (hinzufügen){
 			state.gebote[i][0]=[state.reihe[i],wert];
 		}
+
 			var delta=0;
 			if (tugendsein(state.reihe[i])){
 				delta=wert;
 			} else {
 				delta=-wert;
 			}
-			state.healths[i]+=delta;
+
+			{
+				var wort = 	state.reihe[i];
+
+				//for every other character
+				for (var o=0;o<agent_zahl;o++){
+					if (o===agent){
+						continue;
+					}
+
+					var tugend = tugendsein(wort);
+					var o_does = befehlWert(o,wort);
+					
+					 // if you fail to do something good that they value, they will punish you
+					if (wert==-1 && tugend===true && o_does===1){
+						delta-=1;
+					}
+
+					//if you do something evil that they are not allowed to do, they will punish you
+					if (wert==1 && tugend===false && o_does===-1){
+						delta-=1;
+					}
+				}
+				state.healths[i]+=delta;
+			}
 
 		//3 bewege die Vorschauzeile hinunter
 
@@ -523,8 +546,38 @@
 		stellZustand();
 	}
 
-	function hüllWort(w){
-		if (tugendsein(w)){
+	function hüllWort(w,agent){
+		var tugend = tugendsein(w);
+
+		if (agent>=0){
+			var delta=0;
+
+			for (var o=0;o<agent_zahl;o++){
+				if (o===agent){
+					continue;
+				}
+
+				var o_does = befehlWert(o,w);
+				
+				 // if you fail to do something good that they value, they will punish you
+				if (tugend===true && o_does===1){
+					delta++;
+				}
+
+				//if you do something evil that they are not allowed to do, they will punish you
+				if (tugend===false && o_does===-1){
+					delta++;
+				}
+			}
+			if (delta!=0){
+				w+='<sup>';
+				for (var i=0;i<delta;i++){
+					w+='†';
+				}
+				w+='</sup>';
+			}
+		}
+		if (tugend){
 			w = `<span class="tugend">${w}</span>`;
 		} else {
 			w = `<span class="laster">${w}</span>`;
