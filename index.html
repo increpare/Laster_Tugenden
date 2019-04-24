@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Allgemeine Befehle der Göttin</title>
+	<style>
+		body {
+
+		  max-width: 600px;
+		  margin: auto;
+		  padding-top: 10px;
+		}
+		h1{
+			text-align: center;
+		}
+		table {
+  			border-collapse: collapse;
+		}
+		table {
+			border:none;
+		}
+		th, td {
+		  border: 1px solid black;
+		}
+		td {
+			width:100pt;
+			text-align: center;
+		}
+		.oben {
+			border-top: none;
+		}
+		.obenleft {
+			/*border-left: none;*/
+		}
+		.obenright {
+			/*border-right: none;*/
+		}
+		#reihe {
+			font-weight: bold;
+			text-align: center;
+			font-size: 150%;
+
+		}
+		#ausgewählt {
+			font-weight: bold;
+			text-align: center;
+		}
+		.side {
+			width:30pt;
+		  	border-left: none;
+		  	border-right: none;
+		  	text-align: center;	
+		}
+		.emside {
+			width:30pt;
+			border:none;
+		}
+		.status {
+			height:50pt;
+		}
+		.good {
+			background-color: lightgreen;
+		}
+		.evil {
+			background-color: pink;
+		}
+		.goodbad {			
+			height:50pt;
+			border:none;
+			font-weight: bold;
+			font-size: 200%;
+		}
+		.invis {
+			border:none;
+		}
+		#score {
+			text-align: left;
+			border:none;
+			font-weight: none;
+		}
+		button {			
+			/*border:none;*/
+			font-weight: bold;
+			font-size: 100%;
+			/*width: 100%;*/
+		}
+		#goodbutton {
+			background-color: lightgreen;
+		}
+		#badbutton {
+			background-color: pink;
+		}
+	</style>
+</head>
+<body>
+	<h1>Allgemeine Befehle der Göttin</h1>
+	<p>
+
+<table id="haupttabelle">
+		<tr>
+		<td class="emside">
+		</td>
+		<td class="goodbad" colspan="2">
+			<button type="button" id="goodbutton"  accesskey="s">Du sollst </button>
+		</td>
+		<td class="goodbad"  colspan="2">
+			<button type="button" id="badbutton"  accesskey="n">Du sollst <u>nicht</u></button>
+		</td>
+		<td class="emside">
+		</td>
+	</tr>
+		<tr>
+		<td class="emside">
+		</td>
+		<td id="score">
+			Score:10
+		</td>
+		<td class="invis">
+		</td>
+		<td class="invis">
+		</td>
+		<td class="invis">
+		</td>
+		<td class="emside">
+		</td>
+	</tr>
+
+	<tr class="oben">
+		<td class="emside">
+		</td>
+		<td id="r1c1" class="oben obenleft">⋮
+		</td>
+		<td id="r1c2" class="oben">⋮
+		</td>
+		<td id="r1c3" class="oben">⋮
+		</td>
+		<td id="r1c4" class="oben obenright">⋮
+		</td>
+		<td class="emside">
+		</td>
+	</tr>
+
+</table>
+
+<p>
+	<button>New Game</button>
+<script type="text/javascript">
+	var state=[];
+
+	var agent_zahl = 4;
+	var gebot_zahl = 10;
+	var vor_zeile_zahl = 2;
+
+
+	var starthealth=3;
+
+
+	var tugenden = [
+	'Demut','Mildtätigkeit','Keuschheit','Geduld','Mäßigung','Wohlwollen','Fleiß'
+	];
+	var laster = [
+	'Hochmut','Habgier','Wollust','Zorn','Völlerei','Neid','Faulheit'
+	];
+	var worte = tugenden.concat(laster);
+	
+	function getWort(){
+		return worte[Math.floor(Math.random()*worte.length)];
+	}
+
+	function stellZustand(){
+
+		for (var i=0;i<agent_zahl;i++){
+			var elem = document.getElementById('health'+i);
+			elem.innerHTML=state.healths[i];
+		}
+
+		for (var i=0;i<agent_zahl;i++){
+			for (var j=0;j<vor_zeile_zahl;j++){
+				var elem = document.getElementById(`v${j}c${i}`);
+				console.log(i,j);
+				elem.innerHTML=state.vor[i][j];
+			}
+		}
+
+		for (var i=0;i<agent_zahl;i++){
+			for (var j=0;j<gebot_zahl;j++){
+				var elem = document.getElementById(`g${j}c${i}`);
+				console.log(i,j);
+				var gebot = state.gebote[i][j];
+				if (gebot.length===0){
+					elem.innerHTML="&nbsp;";
+					continue;
+				}
+				elem.innerHTML=gebot[0];
+			}
+		}
+
+		// state.gebote=[];
+		// for (var i=0;i<agent_zahl;i++){
+		// 	state.gebote.push([]);
+		// 	for (var j=0;j<gebot_zahl;j++){
+		// 		state.gebote[i].push(getWort());
+		// 	}
+		// }
+
+		// state.reihe=[];
+		for (var i=0;i<agent_zahl;i++){
+			var elem = document.getElementById(`agw${i}`);
+			elem.innerHTML=state.reihe[i];
+		// 	state.reihe.push(getWort());
+		}
+	}
+
+	function generiereTabelle(){
+
+		var table = document.getElementById('haupttabelle');
+
+		state={};
+		state.healths=[];
+		for (var i=0;i<agent_zahl;i++){
+			state.healths.push(starthealth);
+		}
+
+		state.vor=[];
+		for (var i=0;i<agent_zahl;i++){
+			state.vor.push([]);
+			for (var j=0;j<gebot_zahl;j++){
+				state.vor[i].push(getWort());
+			}
+		}
+
+		state.gebote=[];
+		for (var i=0;i<agent_zahl;i++){
+			state.gebote.push([]);
+			for (var j=0;j<gebot_zahl;j++){
+				state.gebote[i].push([]);
+			}
+		}
+
+		state.reihe=[];
+		for (var i=0;i<agent_zahl;i++){
+			state.reihe.push(getWort());
+		}
+
+		var inner = "";
+
+		for (var i=0;i<vor_zeile_zahl;i++){
+			inner += `
+	<tr>
+		<td class="emside">
+		</td>`
+
+			for (var j=0;j<agent_zahl;j++){
+				inner +=`<td id="v${i}c${j}">
+			platzhalter
+		</td>`
+			}
+
+			inner +=`
+		<td class="emside">
+		</td>
+	</tr>`
+
+		}
+
+		inner+= `
+	<tr id="ausgewählt">
+		<td class="side">
+			->
+		</td>`
+
+
+			for (var j=0;j<agent_zahl;j++){
+				inner +=`<td id="agw${j}">
+			platzhalter
+		</td>`
+			}
+
+		inner+=`
+		<td class="side">
+			&lt;-
+		</td>
+	</tr>`
+
+		inner+=`
+	<tr class="status" id ="reihe">
+		<td class="emside">
+		</td>`
+
+
+			for (var j=0;j<agent_zahl;j++){
+				inner +=`
+		<td id="health${j}">
+			666
+		</td>`
+			}
+
+
+		inner+=`
+		<td class="emside">
+		</td>
+	</tr>`
+
+
+		for (var i=0;i<gebot_zahl;i++){
+			inner += `
+	<tr>
+		<td class="emside">
+		</td>`
+
+			for (var j=0;j<agent_zahl;j++){
+				inner +=`<td id="g${i}c${j}">
+			platzhalter
+		</td>`
+			}
+
+			inner +=`
+		<td class="emside">
+		</td>
+	</tr>`
+
+		}
+		table.innerHTML +=  inner;
+	}
+
+	generiereTabelle();
+	stellZustand();
+
+</script>
+</body>
+</html>
