@@ -2,24 +2,24 @@
 
 virtue/vice etymology
 
-VIRTURES 6:1 latin-derived
+VIRTURES 5:2 romance
 
 Chastity 	latin
 Temperance 	latin
-Charity		latin
-Diligence	latin (via french)
-Patience	latin (via french)
+Charity		old english
+Diligence	old french
+Patience	old french
 Kindness	old english
-Humility 	latin
+Humility 	old french
 
 
-VICES : 5:2 germanic-derived
+VICES : 5:2 germanic
 
-Lust		germanic
-Gluttony 	french
-Greed 		germanic
-Sloth 		english
-Wrath 		english
-Envy 		latin (via french)
-Pride 		english
+Lust		old english
+Gluttony 	old french
+Greed 		old english
+Sloth 		old english
+Wrath 		old english
+Envy 		old french
+Pride 		old english
 

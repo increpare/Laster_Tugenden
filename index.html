@@ -2,25 +2,90 @@
 <html>
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<title>Allgemeine Befehle der Göttin</title>
+	<title>UWOG</title>
 	<style>
-		/* latin */
-@font-face {
-  font-family: 'Playfair Display';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Playfair Display Regular'), local('PlayfairDisplay-Regular'), url(nuFiD-vYSZviVYUb_rj3ij__anPXDTzYgEM86xQ.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+
+
+
+.quickshake {
+    -webkit-animation: pulsateb 0.5s ease-out;
+    /*-webkit-animation-iteration-count: once; */
+    opacity: 0;
+    float: right;
+    position:absolute;
 }
-/* latin */
-@font-face {
-  font-family: 'UnifrakturMaguntia';
-  font-style: normal;
-  font-weight: 400;
-  src: local('UnifrakturMaguntia'), url(WWXPlieVYwiGNomYU-ciRLRvEmK7oaVemGZMFABK1Q.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+@-webkit-keyframes pulsateb {
+    0% { 
+        opacity: 1;
+        transform: translate(0px, 0px);
+        font-size: 100%;
+    }
+    50% { 
+        opacity: 0.5;
+        transform: translate(5px, -10px);
+        font-size: 120%;
+    }
+    100% { 
+        opacity: 0;
+        transform: translate(10px, -20px);
+        font-size: 100%;
+    }
 }
 
+abbr {
+text-decoration: none !important;
+border-bottom: 0px !important;
+}
+
+
+
+.fadeout {
+    -webkit-animation: pulsateb 0.5s ease-out;
+    /*-webkit-animation-iteration-count: once; */
+    opacity: 0;
+    float: right;
+    position:absolute;
+}
+@-webkit-keyframes pulsateb {
+    0% { 
+        opacity: 1;
+        transform: translate(0px, 0px);
+        font-size: 100%;
+    }
+    50% { 
+        opacity: 0.5;
+        transform: translate(5px, -10px);
+        font-size: 120%;
+    }
+    100% { 
+        opacity: 0;
+        transform: translate(10px, -20px);
+        font-size: 100%;
+    }
+}
+
+.pulsate {
+    -webkit-animation: pulsate 0.5s ease-out;
+    -webkit-animation-iteration-count: infinite; 
+    opacity: 0.5;
+}
+@-webkit-keyframes pulsate {
+    0% { 
+        opacity: .2;
+        font-size: 100%;
+    }
+    50% { 
+        opacity: 1;
+        font-size: 120%;
+    }
+    100% { 
+        opacity: .2;
+        font-size: 100%;
+    }
+}
+		ul{
+			display :inline-block;
+		}
 		body {
 
 		  max-width: 600px;
@@ -70,6 +135,13 @@
 			/*font-family: 'UnifrakturMaguntia', cursive;*/
 			color:red;
 		}
+		.unentschieden {
+			/*font-family: 'UnifrakturMaguntia', cursive;*/
+			/*color:gray;*/
+			/*alpha:0.5;*/
+			/*background-color: lightgray;*/
+			opacity: 0.5;
+		}
 		.side {
 			width:30pt;
 		  	border-left: none;
@@ -95,6 +167,12 @@
 			font-weight: bold;
 			font-size: 200%;
 		}
+		.healtextclass {
+			color:blue;
+		}
+		.damagetextclass {
+			color:brown;
+		}
 		.invis {
 			border:none;
 		}
@@ -107,7 +185,6 @@
 			/*border:none;*/
 			font-weight: bold;
 			font-size: 100%;
-			/*width: 100%;*/
 		}
 		#goodbutton {
 			background-color: lightgreen;
@@ -115,10 +192,63 @@
 		#badbutton {
 			background-color: pink;
 		}
+
+		/*from w3schools*/
+
+		/* Tooltip container */
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black; 
+  /* If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+font-weight: normal;
+  visibility: hidden;
+  width: 300px;
+  background-color: #555;
+  color: #fff;
+  text-align: left;
+  padding: 5px 5px;
+  border-radius: 6px;
+
+  /* Position the tooltip text */
+  position: absolute;
+  z-index: 1;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -60px;
+
+  /* Fade in tooltip */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+/* Tooltip arrow */
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 12%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: none;
+
+}
 	</style>
 </head>
 <body>
-	<h1>Allgemeine Befehle der Göttin</h1>
+	<h1>UWOG</h1>
 	<p>
 
 <table id="haupttabelle">
@@ -138,7 +268,7 @@
 		<td class="emside">
 		</td>
 		<td id="score">
-			Score:10
+			Score:<span id="scoretxt">0</span> (High:<span id="maxscore">0</span>)
 		</td>
 		<td class="invis">
 		</td>
@@ -155,7 +285,9 @@
 		</td>
 		<td id="r1c1" class="oben obenleft">⋮
 		</td>
-		<td id="r1c4" class="oben obenright">⋮
+		<td id="r1c4" class="oben">⋮
+		</td>
+		<td id="r1c4" class="oben">⋮
 		</td>
 		<td id="r1c4" class="oben obenright">⋮
 		</td>
@@ -166,7 +298,21 @@
 </table>
 
 <p>
-	<button type="button" id="newgamebutton" >Spiel neustarten</button>
+	<button type="button" id="newgamebutton" >New Game</button>
+	<p>
+		<ul>
+		<li>Being virtuous +1 health.
+		<li>Not being virtuous -1 health.
+		<li>Avoiding vices +1 health.
+		<li>Committing vices -1 health.
+		<li>People who have forsworn a crime will inflict -1 additional damage on perpetrators.
+		<li>People who follow a particular virtue will punish those who neglect it with -1 damage.
+		<li>People remember what you've told them. If they are in the same sitaution in future, they will automatically carry out the requested behaviour.
+	</ul>
+		(You can mouse hover over cells in the top 3 rows to find out what their effect will be).
+<p>
+	<center><a href="https://www.increpare.com">home</a></center>
+	<p>
 <script type="text/javascript">
 	var state=[];
 
@@ -174,8 +320,9 @@
 	var gebot_zahl = 14;
 	var vor_zeile_zahl = 2;
 
-
-	var starthealth=6;
+	var emoji = ['🤡','🤖','💩','👽'];
+	var todemoji='💀';
+	var starthealth=4;
 
 
 	var gutSchaltfläche;
@@ -191,11 +338,34 @@
 	// // 'Hochmut','Habgier','Wollust','Zorn','Völlerei','Neid','Faulheit'
 	// ];
 
-	var tugenden = ['Chastity','Temperance','Charity','Diligence','Patience','Kindness','Humility'];
+	var tugenden = ['Faith','Valour','Charity','Diligence','Patience','Kindness','Humility'];
 
-	var laster = ['Lust','Gluttony','Greed','Sloth','Wrath','Envy','Pride'];
+	var laster = ['Murder','Bestiality','Sodomy','Theft','Stalking','Vulgarity','Rebellion'];
 	var worte = tugenden.concat(laster);
 	
+	function getHighScore(){
+		try {
+			var storagedHighScore = localStorage.getItem("highscore");
+			var highscore=0;
+			if (storagedHighScore!=null){
+				highscore=parseInt(storagedHighScore);
+			}
+			return highscore;
+		} catch(e){
+			return 0;
+		}
+	}
+	function setHighScore(){
+		try {
+			var hs = getHighScore();
+			if (hs<state.score){
+				localStorage.setItem("highscore",state.score);
+			}
+		} catch(e){
+
+		}
+	}
+
 	function tugendsein(w){
 		return tugenden.indexOf(w)>=0;
 	}
@@ -209,7 +379,10 @@
 
 		for (var i=0;i<gebot_zahl;i++){
 			var gebot = state.gebote[agent][i];
-			if (gebot.length==0){
+			if (gebot.length===0){
+				continue;
+			}
+			if (gebot[1]===0){
 				continue;
 			}
 			if (gebot[0]==wort){
@@ -221,15 +394,34 @@
 
 	function stellZustand(){
 
+		document.getElementById("scoretxt").innerHTML=state.score;
+
 		for (var i=0;i<agent_zahl;i++){
 			var elem = document.getElementById('health'+i);
-			elem.innerHTML=state.healths[i];
+			if (state.healths[i]>0){
+				if (state.healths[i]<3 &&!verloren()){
+					elem.innerHTML=`${emoji[i]} <span class="pulsate">${state.healths[i]}</span>`;
+				} else {
+					elem.innerHTML=`${emoji[i]} ${state.healths[i]}`;										
+				}
+
+			} else {
+				elem.innerHTML=todemoji+" "+ state.healths[i];
+			}
+			if (state.healths[i]!==state.oldhealths[i]){
+				var delta = state.healths[i]-state.oldhealths[i];
+				var deltas = ""+delta;
+				if (delta>0){
+					deltas = "+"+deltas;
+				}
+				elem.innerHTML+=`<span class="fadeout ${delta>0?"healtextclass":"damagetextclass"}">(${deltas})</span>`;
+				state.oldhealths[i]=state.healths[i];
+			}
 		}
 
 		for (var i=0;i<agent_zahl;i++){
 			for (var j=0;j<vor_zeile_zahl;j++){
 				var elem = document.getElementById(`v${j}c${i}`);
-				console.log(i,j);
 				var wort = state.vor[i][j];
 				elem.innerHTML=hüllWort(wort,i);
 
@@ -251,7 +443,6 @@
 		for (var i=0;i<agent_zahl;i++){
 			for (var j=0;j<gebot_zahl;j++){
 				var elem = document.getElementById(`g${j}c${i}`);
-				console.log(i,j);
 				var gebot = state.gebote[i][j];
 				if (gebot.length===0){
 					elem.innerHTML="&nbsp;";
@@ -261,13 +452,13 @@
 				var wert = befehlWert(i,gebot[0]);
 				switch(wert){
 					case -1:
-					elem.className="evil";
+					elem.className="gebotzelle evil";
 					break;
 					case 0:
-					elem.className="";
+					elem.className="gebotzelle unentschieden";
 					break;
 					case 1:
-					elem.className="good";
+					elem.className="gebotzelle good";
 					break;
 				}
 				elem.innerHTML=hüllWort(gebot[0],-1);
@@ -304,6 +495,58 @@
 
 		// 	state.reihe.push(getWort());
 		}
+
+		if (verloren()){			
+			gutSchaltfläche.disabled=true;
+			böseSchaltfläche.disabled=true;
+			var hs = getHighScore();
+			var text = `Game over.\nYour score was ${state.score} :)`;
+			if (hs<state.score){
+				text+="\nNew high score!";
+			} else {
+				text+=`\n(High Score : ${hs})`
+			}
+
+			alert(text);
+			setHighScore(state.score);
+		}
+		document.getElementById("maxscore").innerHTML=getHighScore();
+	}
+
+	var highlightrow=-1;
+	var highlightrow2=-1;
+	var stylesheet = document.styleSheets[0];
+
+	function vor_onmouseenter(zeile,agent){
+		var wort = state.vor[agent][zeile];
+		var wortindex = worte.indexOf(wort);
+		highlightrow=stylesheet.insertRule(`.gebotrow${wortindex} .gebotzelle{ } `);
+		highlightrow2=stylesheet.insertRule(`.gebotrow${wortindex} { border: 1px solid black; background-color:white; }`);
+	}
+	
+	function vor_onmouseleave(agent,zeile){
+		if (highlightrow>=0){
+			stylesheet.deleteRule(highlightrow);
+			stylesheet.deleteRule(highlightrow2);
+			highlightrow=-1;
+		}
+	}
+
+
+	function agw_onmouseenter(agent){
+
+		var wort = state.reihe[agent];
+		var wortindex = worte.indexOf(wort);
+		highlightrow=stylesheet.insertRule(`.gebotrow${wortindex} .gebotzelle{ } `);
+			highlightrow2=stylesheet.insertRule(`.gebotrow${wortindex} { border: 1px solid black; background-color:white; }`);
+	}
+	
+	function agw_onmouseleave(i,j){
+		if (highlightrow>=0){
+			stylesheet.deleteRule(highlightrow);
+			stylesheet.deleteRule(highlightrow2);
+			highlightrow=-1;
+		}
 	}
 
 	function generiereTabelle(){
@@ -311,9 +554,12 @@
 		var table = document.getElementById('haupttabelle');
 
 		state={};
+		state.score=0;
 		state.healths=[];
+		state.oldhealths=[];
 		for (var i=0;i<agent_zahl;i++){
 			state.healths.push(starthealth);
+			state.oldhealths.push(starthealth);
 		}
 
 		state.vor=[];
@@ -328,7 +574,7 @@
 		for (var i=0;i<agent_zahl;i++){
 			state.gebote.push([]);
 			for (var j=0;j<gebot_zahl;j++){
-				state.gebote[i].push([]);
+				state.gebote[i].push([worte[j],0]);
 			}
 		}
 
@@ -346,7 +592,7 @@
 		</td>`
 
 			for (var j=0;j<agent_zahl;j++){
-				inner +=`<td id="v${i}c${j}">
+				inner +=`<td  onmouseenter="vor_onmouseenter(${i},${j})" onmouseleave="vor_onmouseleave(${i},${j})" id="v${i}c${j}">
 			platzhalter
 		</td>`
 			}
@@ -366,7 +612,7 @@
 
 
 			for (var j=0;j<agent_zahl;j++){
-				inner +=`<td id="agw${j}">
+				inner +=`<td  onmouseenter="agw_onmouseenter(${j})" onmouseleave="agw_onmouseleave(${i},${j})"  id="agw${j}">
 			platzhalter
 		</td>`
 			}
@@ -399,7 +645,7 @@
 
 		for (var i=0;i<gebot_zahl;i++){
 			inner += `
-	<tr>
+	<tr class="gebotrow${i}">
 		<td class="emside">
 		</td>`
 
@@ -419,9 +665,13 @@
 	}
 
 	function sollAnimieren(){		
+		if (verloren()){
+			return false;
+		}
+
 		for (var i=0;i<agent_zahl;i++){
 			var wort = state.reihe[i];
-			if (befehlWert(i,wort)!=0){
+			if (befehlWert(i,wort)!==0){
 				return true;
 			}
 		}
@@ -430,12 +680,16 @@
 	function tueTick(){
 		for (var i=0;i<agent_zahl;i++){
 			var wort = state.reihe[i];
-			if (befehlWert(i,wort)!=0){
+			if (befehlWert(i,wort)!==0){
 				var wert = befehlWert(i,wort);
 				befehlSpalte(i,wert,false);
 			}
 		}
-		stellZustand();
+
+		if (voll()&& verloren()===false){
+			state.score++;		
+		}
+
 
 		if (sollAnimieren()){
 			fangMitAutoAn();
@@ -444,6 +698,8 @@
 			böseSchaltfläche.disabled=false;
 			neuSchaltfläche.disabled=false;
 		}
+
+		stellZustand();
 	}
 
 	function fangMitAutoAn(){
@@ -451,7 +707,27 @@
 		böseSchaltfläche.disabled=true;
 		neuSchaltfläche.disabled=true;
 
-		setTimeout(tueTick,100);
+		setTimeout(tueTick,500);
+	}
+
+	function verloren(){
+		for (var i=0;i<agent_zahl;i++){
+			if (state.healths[i]<=0){
+				return true;
+			}
+		}
+		return false;
+	}
+
+	function voll(){
+		for (var i=0;i<agent_zahl;i++){
+			for (var j=0;j<gebot_zahl;j++){
+				if (state.gebote[i][j][1]===0){
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 
 	function befehl(wert){
@@ -463,6 +739,9 @@
 			fangMitAutoAn();
 		}
 
+		if (!verloren()){
+			state.score++;
+		}
 		stellZustand();
 	}
 
@@ -470,16 +749,17 @@
 		var i=agent;
 		//1 bewege gebote hinunter
 
-		if (hinzufügen){
-			for (var j=gebot_zahl-1;j>=0;j--){
-				state.gebote[i][j+1]=state.gebote[i][j];
-			}
-		}
+		// if (hinzufügen){
+		// 	for (var j=gebot_zahl-1;j>=0;j--){
+		// 		state.gebote[i][j+1]=state.gebote[i][j];
+		// 	}
+		// }
 
 		//2 bewege die aktive Zeile hinunter + set wert
 
+		var gebotzeil = worte.indexOf(state.reihe[i]);
 		if (hinzufügen){
-			state.gebote[i][0]=[state.reihe[i],wert];
+			state.gebote[i][gebotzeil][1]=wert;
 		}
 
 			var delta=0;
@@ -512,6 +792,9 @@
 					}
 				}
 				state.healths[i]+=delta;
+				if (state.healths[i]<0){
+					state.healths[i]=0;
+				}
 			}
 
 		//3 bewege die Vorschauzeile hinunter
@@ -534,24 +817,39 @@
 	}
 
 	function aufGutKlicken(){
+		if (gutSchaltfläche.disabled){
+			return;
+		}
 		befehl(1);
 	}
 	
 	function aufBöseKlicken(){
+		if (böseSchaltfläche.disabled){
+			return;
+		}
 		befehl(-1);
 	}
 	
 	function aufNeuKlicken(){
-		generiereTabelle();
-		stellZustand();
+		location.reload();
 	}
 
-	function hüllWort(w,agent){
+	function signInt(i){
+		if (i<0){
+			return ""+i;
+		} else {
+			return "+"+i;
+		}		
+	}
+
+	function hüllWort(w,agent,tooltiperlauben){
 		var tugend = tugendsein(w);
+		tooltiperlauben=false;//agent>=0;
 
 		if (agent>=0){
 			var delta=0;
 
+			var disapproves=[];
 			for (var o=0;o<agent_zahl;o++){
 				if (o===agent){
 					continue;
@@ -562,25 +860,63 @@
 				 // if you fail to do something good that they value, they will punish you
 				if (tugend===true && o_does===1){
 					delta++;
+					disapproves.push(emoji[o]);
 				}
 
 				//if you do something evil that they are not allowed to do, they will punish you
 				if (tugend===false && o_does===-1){
 					delta++;
+					disapproves.push(emoji[o]);
 				}
 			}
-			if (delta!=0){
+
+
+
+			var wortindex = worte.indexOf(w);
+			var compulsory = state.gebote[agent][wortindex][1];
+			var tooltip="";
+
+			var bigeffect = signInt(-1-disapproves.length)+` = -1 (${tugend?"virtue":"vice"})`;
+			if (disapproves.length===1){
+				bigeffect+=` -1 (${disapproves[0]} disapproves)`				
+			} else if (disapproves.length>1){
+				bigeffect += ` -${disapproves.length} (`
+				for (var i=0;i<disapproves.length;i++){
+					bigeffect+=disapproves[i];
+				}
+				bigeffect+=` disapprove)`
+			}
+
+			if (disapproves.length===0){
+				bigeffect = `-1 (${tugend?"virtue":"vice"})`;
+			}
+
+			if (tugend){
+				tooltip = "Do: +1 (virtue)\nDon't do: "+bigeffect;
+			} else {
+				tooltip = "Do: "+bigeffect+"\nDon't do: +1 (vice)";
+			}
+
+
+			// var tooltip=
+			if (delta!==0){
 				w+='<sup>';
 				for (var i=0;i<delta;i++){
 					w+='†';
 				}
 				w+='</sup>';
 			}
+
+			if (tooltip.length>0){
+				// w +=`<span class="tooltiptext">${tooltip}</span>`
+				w=`<abbr title="${tooltip}">${w}</abbr>`
+			}
 		}
+
 		if (tugend){
-			w = `<span class="tugend">${w}</span>`;
+			w = `<span class="tugend ${(tooltiperlauben===true)?"tooltip":""}">${w}</span>`;
 		} else {
-			w = `<span class="laster">${w}</span>`;
+			w = `<span class="laster ${(tooltiperlauben===true)?"tooltip":""}">${w}</span>`;
 		} 
 
 		return w; 
@@ -597,6 +933,7 @@
 		neuSchaltfläche.addEventListener("click", aufNeuKlicken);
 
 	}
+
 
 	generiereTabelle();
 	stellZustand();
